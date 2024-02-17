@@ -15,7 +15,7 @@ import java.net.URI;
 public class UserLoginController {
 
 
-   @GetMapping(produces = "application/json")
+   @GetMapping(path = "login", produces = "application/json")
    public String login() throws IOException, InterruptedException, ParseException, SpotifyWebApiException {
       SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setClientId("")
