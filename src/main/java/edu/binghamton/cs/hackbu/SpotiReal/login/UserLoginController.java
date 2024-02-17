@@ -11,6 +11,8 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 import java.io.IOException;
 import java.net.URI;
 
+import edu.binghamton.cs.hackbu.SpotiReal.SpotiRealUtil;
+
 @RestController
 public class UserLoginController {
 
@@ -18,8 +20,8 @@ public class UserLoginController {
    @GetMapping(path = "login", produces = "application/json")
    public String login() throws IOException, InterruptedException, ParseException, SpotifyWebApiException {
       SpotifyApi spotifyApi = new SpotifyApi.Builder()
-            .setClientId("")
-            .setClientSecret("")
+            .setClientId(SpotiRealUtil.getClientID())
+            .setClientSecret(SpotiRealUtil.getClientSecret())
             .setHost("127.0.0.1")
             .setPort(8080)
             .setRedirectUri(URI.create("http://127.0.0.1:8080/callback"))
