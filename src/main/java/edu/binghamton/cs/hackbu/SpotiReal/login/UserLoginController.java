@@ -25,9 +25,9 @@ public class UserLoginController {
    @GetMapping(path = "login", produces = "application/json")
    @CrossOrigin
    public String login() throws IOException, InterruptedException, ParseException, SpotifyWebApiException {
-      final SpotifyApi spotifyApi = SpotiReal.getInstance().getApi();
+      SpotifyApi api = SpotiReal.getApi();
 
-      AuthorizationCodeUriRequest auth = spotifyApi.authorizationCodeUri()
+      AuthorizationCodeUriRequest auth = api.authorizationCodeUri()
             .scope("user-read-private user-read-email user-top-read")
             .show_dialog(true)
             .build();
@@ -36,12 +36,15 @@ public class UserLoginController {
    }
 
    @GetMapping(path = "/callback")
-   public void redirect(String authorizationCode) throws IOException, ParseException, SpotifyWebApiException {
-      AuthorizationCodeCredentials authorizationCodeCredentials = SpotiReal
-            .getInstance()
-            .getApi()
-            .authorizationCode(authorizationCode).build().execute();
+   public String redirect(String authorizationCode) throws IOException, ParseException, SpotifyWebApiException {
+      return authorizationCode;
+//      final SpotifyApi api = SpotiReal.getApi();
 
+//      AuthorizationCodeCredentials authorizationCodeCredentials = api
+//            .authorizationCode(authorizationCode)
+//            .build().execute();
+//      api.setAccessToken(authorizationCodeCredentials.getAccessToken());
+//      api.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
    }
 
 }
